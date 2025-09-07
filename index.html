@@ -26,13 +26,36 @@
       font-size: 1.5em;
       font-weight: bold;
     }
+    #suggestions {
+      margin-top: 1em;
+      text-align: left;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #suggestions ul {
+      list-style: none;
+      padding: 0;
+    }
+    #suggestions li {
+      padding: 2px 0;
+      border-bottom: 1px solid #ddd;
+      font-size: 1.1em;
+    }
   </style>
+
+  <!-- iOS/Android home-screen friendliness -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Scrabble Checker">
+  <meta name="theme-color" content="#ffffff">
 </head>
 <body>
   <h1>Scrabble Word Checker</h1>
   <input type="text" id="wordInput" placeholder="Enter a word" />
   <button id="checkButton">Check</button>
   <div id="result"></div>
+  <div id="suggestions"></div>
 
   <!-- Your word list -->
   <script src="./scrabble_words.js"></script>
@@ -41,20 +64,33 @@
     const input = document.getElementById("wordInput");
     const button = document.getElementById("checkButton");
     const result = document.getElementById("result");
+    const suggestionsDiv = document.getElementById("suggestions");
 
     function checkWord() {
       const word = input.value.trim().toUpperCase();
+      result.textContent = "";
+      suggestionsDiv.innerHTML = "";
+
       if (!word) {
         result.textContent = "Please enter a word.";
         result.style.color = "black";
         return;
       }
+
+      // Check exact word
       if (words.includes(word)) {
         result.textContent = `"${word}" is valid! ✅`;
         result.style.color = "green";
       } else {
         result.textContent = `"${word}" is not valid ❌`;
         result.style.color = "red";
+      }
+
+      // Show up to 50 suggestions
+      const matches = words.filter(w => w.startsWith(word)).slice(0, 50);
+      if (matches.length > 0) {
+        const listItems = matches.map(m => `<li>${m}</li>`).join("");
+        suggestionsDiv.innerHTML = `<h3>Suggestions:</h3><ul>${listItems}</ul>`;
       }
     }
 
