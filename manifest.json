@@ -1,0 +1,9 @@
+{
+  "name": "Scrabble Word Checker",
+  "short_name": "Scrabble",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": []
+}
