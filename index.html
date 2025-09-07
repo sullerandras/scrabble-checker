@@ -42,6 +42,10 @@
       border-bottom: 1px solid #ddd;
       font-size: 1.1em;
     }
+    .version {
+      font-size: 70%;
+      color: lightgray;
+    }
   </style>
 
   <!-- iOS/Android home-screen friendliness -->
@@ -51,7 +55,7 @@
   <meta name="theme-color" content="#ffffff">
 </head>
 <body>
-  <h1>Scrabble Word Checker</h1>
+  <h1>Scrabble Word Checker <span class="version">v1.1</span></h1>
   <input type="text" id="wordInput" placeholder="Enter a word" />
   <button id="checkButton">Check</button>
   <div id="result"></div>
